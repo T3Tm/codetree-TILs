@@ -22,7 +22,8 @@ elif n == 3:
     if len(plus) == 2:result = minus[0] * plus[0] * plus[1]
     elif len(plus) == 3:result = plus[-1] * plus[-2] * plus[-3]
 else:
-    result = minus[0] * minus[1] * plus[-1]
+    if len(minus) > 1:
+        result = minus[0] * minus[1] * plus[-1]
     if len(plus) > 2:
         result = max(result, plus[-1] * plus[-2] * plus[-3])
 print(result)
