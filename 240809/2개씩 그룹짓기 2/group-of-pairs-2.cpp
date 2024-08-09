@@ -10,7 +10,7 @@ int main(){
         nums.insert(num);
     }
 
-    int left = 0, right = *prev(nums.end());
+    int left = 0, right = *prev(nums.end()) - *nums.begin();
     while(left<=right){
         int mid = (left + right) >> 1;
         multiset<int>temp;
