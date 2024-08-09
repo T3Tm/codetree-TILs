@@ -4,7 +4,7 @@ using namespace std;
 int main(){
     cin.tie(0) -> ios::sync_with_stdio(0);
     int n;cin >> n;
-    set<int>nums;
+    multiset<int>nums;
     for(int i=0;i<2 * n;i++){
         int num;cin >> num;
         nums.insert(num);
@@ -13,7 +13,7 @@ int main(){
     int left = 0, right = *prev(nums.end());
     while(left<=right){
         int mid = (left + right) >> 1;
-        set<int>temp;
+        multiset<int>temp;
         for(auto &v:nums)temp.insert(v);
 
         bool flag = true;
@@ -21,6 +21,8 @@ int main(){
             auto it = temp.lower_bound(v + mid);
             if(it == temp.end()){
                 flag = false;
+                break;
+            }else if(*it == v){
                 break;
             }
             temp.erase(it);
