@@ -12,10 +12,10 @@ hol -= t
 cnt = 0
 if not hol:
     cnt = 1
-else:#짝수가 다 썼음 2,1,2,1
+else:#짝수가 다 썼음 2,1,2,1,2
     # 1일 때 2라면
     result += hol // 3
     hol %= 3
-    if hol == 1:cnt = -2
+    if hol == 1:cnt = -1
     elif hol == 2:cnt = 1
 print(result * 2 + cnt)
