@@ -9,7 +9,7 @@ for _ in range(d):
     minute_to_eat[t][p] = m
 
     cheese_to_eat[m] = cheese_to_eat.get(m,{})
-    cheese_to_eat[m][p] = t
+    cheese_to_eat[m][p] = min(cheese_to_eat[m].get(p,101),t)
 
 sick = set()
 
