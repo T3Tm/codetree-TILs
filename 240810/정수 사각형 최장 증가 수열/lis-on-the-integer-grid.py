@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(250001)
+sys.setrecursionlimit(250002)
 def dfs(x,y):
     if dp[x][y]!=-1:
         return dp[x][y]
