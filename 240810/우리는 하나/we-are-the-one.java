@@ -73,7 +73,7 @@ public class Main {
                 pick[depth] = new Pair(i,j);//현재 지점 넣기
                 PickingK(i,j+1,depth+1,pick);//현재 지점 넣었다고 생각하고 움직이기
                 pick[depth] = new Pair(-1,-1);//현재 지점 빼기
-                if (n * 2 - (i * n + j) < k - depth)return;
+                if (n * 2 - (i * n + j) == k - depth)return;
             }
             y = 0;
         }
