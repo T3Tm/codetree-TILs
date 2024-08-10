@@ -70,7 +70,7 @@ public class Main {
         }
         for(int i=x;i<n;i++){
             for(int j=y;j<n;j++){
-                if (n * 2 - (i + 1) * n - j < k - depth)return;
+                if (n * 2 - (i + 1) * n - (j + 1) < k - depth - 1)return;
                 // 9 - 6 - 2
                 // 1 < 1
                 pick[depth] = new Pair(i,j);//현재 지점 넣기
