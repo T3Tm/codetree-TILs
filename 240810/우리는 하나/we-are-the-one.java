@@ -70,13 +70,10 @@ public class Main {
         }
         for(int i=x;i<n;i++){
             for(int j=y;j<n;j++){
-                if (n * 2 - (i * n + j) < k - depth)return;
-                // 9 - 6
-                //  9 - 7 
-                // 2 , 1
                 pick[depth] = new Pair(i,j);//현재 지점 넣기
                 PickingK(i,j+1,depth+1,pick);//현재 지점 넣었다고 생각하고 움직이기
                 pick[depth] = new Pair(-1,-1);//현재 지점 빼기
+                if (n * 2 - (i * n + j) < k - depth)return;
             }
             y = 0;
         }
