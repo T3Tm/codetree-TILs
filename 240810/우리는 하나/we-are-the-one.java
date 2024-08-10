@@ -27,7 +27,6 @@ public class Main {
             }
             
         }
-        
     }
 
     //최댓값 지정
@@ -68,16 +67,15 @@ public class Main {
             bfs(pick);//뽑은 좌표들로 하여금 maxValue 찾기
             return;
         }
-        if(y == n){
-            PickingK(x+1, 0,depth, pick);
-            return;
+        
+        for(int i=x;i<n;i++){
+            for(int j=y;j<n;j++){
+                pick[depth] = new Pair(i,j);//현재 지점 넣기
+                PickingK(i,j+1,depth+1,pick);//현재 지점 넣었다고 생각하고 움직이기
+                pick[depth] = new Pair(-1,-1);//현재 지점 빼기
+            }
+            y = 0;
         }
-        if(x == n)return;//안됨.
-        //현재 지점 넣기
-        pick[depth] = new Pair(x,y);//현재 지점 넣기
-        PickingK(x,y+1,depth+1,pick);//현재 지점 넣었다고 생각하고 움직이기
-        pick[depth] = new Pair(-1,-1);//현재 지점 빼기
-        PickingK(x,y+1,depth,pick);//현재 지점 안 넣고 움직이기
     }
     // k개의 조합을 뽑는다. 
     public static void process(){
