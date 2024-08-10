@@ -61,15 +61,16 @@ public class Main {
         maxValue = Math.max(maxValue, cnt);
     }
 
+    //depth에 따라서 x,y 남은 것들로 k를 만들 수 있는지 확인
     public static void PickingK(int x, int y, int depth, Pair[] pick){
         if(depth == k){// K개 다 뽑음
             //k번 다 움직임
             bfs(pick);//뽑은 좌표들로 하여금 maxValue 찾기
             return;
         }
-        
         for(int i=x;i<n;i++){
             for(int j=y;j<n;j++){
+                if (n * 2 - i * n - j < k - depth)return;
                 pick[depth] = new Pair(i,j);//현재 지점 넣기
                 PickingK(i,j+1,depth+1,pick);//현재 지점 넣었다고 생각하고 움직이기
                 pick[depth] = new Pair(-1,-1);//현재 지점 빼기
