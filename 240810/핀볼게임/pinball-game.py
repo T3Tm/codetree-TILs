@@ -15,7 +15,7 @@ def turn(x,y, dir):
         elif dir == 2:return 1
         return 0
 def move(x,y, dir):
-    move = (-1,0),(0,1),(1,0),(-1,0)
+    move = (-1,0), (0,1), (1,0),(0,-1)
     nx, ny = x+ move[dir][0] , y + move[dir][1]
     return nx,ny
 def ball(x, y, dir):
@@ -33,12 +33,11 @@ def ball(x, y, dir):
 result = 0
 for i in range(n):
     result = max(result,ball(0,i,2))
-    result = max(result,ball(0,n - i - 1,0))
+    result = max(result,ball(n-1 ,i,0))
 
 #첫번째 열
 #마지막 열
 for i in range(n):
     result = max(result,ball(i,0,1))
-    result = max(result,ball(n - i - 1,0,3))
-
+    result = max(result,ball(i,n - 1,3))
 print(result)
