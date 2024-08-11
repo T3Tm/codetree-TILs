@@ -58,4 +58,4 @@ for _ in range(t):
 
                 board[i][j] = set([idx])
 values = beadList.values()
-print(len(values), max([*map(lambda x:x.w,values)]))
+print(len(values), max(map(lambda x:x.w,values)))
