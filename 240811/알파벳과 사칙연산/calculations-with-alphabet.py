@@ -1,20 +1,31 @@
-def bact(depth, total):
-    global word, result
-    if depth == len(word) >> 1:
-        result = max(result, total)
+def bact(depth):
+    global word, result, s,idx
+    if depth == idx:
+        ret = s[word[0]]
+        for i in range(1,len(word),2):
+            if word[i] == '+':
+                ret += s[word[i+1]]
+            elif word[i] == '-':
+                ret -= s[word[i+1]]
+            else:
+                ret *= s[word[i+1]]
+        result = max(result,ret)
         return
-    op = word[(depth << 1)|1]
     for i in range(1,5):
-        if op == '+':
-            bact(depth + 1, total + i)
-        elif op == '-':
-            bact(depth + 1, total - i)
-        else:
-            bact(depth + 1, total * i)
-        
-
+        s[s[depth]] = i
+        bact(depth + 1)
+        s[s[depth]] = 0
 word = input()
+s = {}
+idx = 0
+for i in word:
+    if i.isalpha():
+        prev = len(s)
+        s[i] = 0
+        after = len(s)
+        if prev != after:
+            s[idx] = i
+            idx += 1
 result = -1 * (10 ** 10)
-for i in range(1,5):
-    bact(0,i)
+bact(0)
 print(result)
