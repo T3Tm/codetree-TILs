@@ -3,9 +3,15 @@ def bact(depth, total):
     if depth == len(word) >> 1:
         result = max(result, total)
         return
-    
+    op = word[(depth << 1)|1]
     for i in range(1,5):
-        bact(depth + 1, eval(f'{total}{word[(depth << 1)|1]}{i}'))
+        if op == '+':
+            bact(depth + 1, total + i)
+        elif op == '-':
+            bact(depth + 1, total - i)
+        else:
+            bact(depth + 1, total * i)
+        
 
 word = input()
 result = -1 * (10 ** 10)
