@@ -2,7 +2,7 @@ n, m = map(int,input().split())
 
 board = [[*map(int,input().split())] for _ in range(n)]
 
-result = 0
+result = -1
 resultk = 101
 for k in range(1,100):
     now = 0
