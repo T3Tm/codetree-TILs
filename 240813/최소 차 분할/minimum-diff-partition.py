@@ -7,8 +7,6 @@ n = int(input())
 # A를 절반에 가깝게 채웠다면
 # 나머지를 B에 채우면 최소가 될 수 있을 것이다.
 li = [*map(int,input().split())]
-li.sort()
-
 
 total = sum(li)
 max_gap = li[1] - li[0]
@@ -32,6 +30,7 @@ for i in range(n):#li[i]를 이용하여 range를 채운다.
         #case1 자기 자신을 더해서 나오는 경우의 수
         if dp[i][j-li[i]]!=-1 or dp[i-1][j-li[i]]!=-1:
             dp[i][j] = 1
+
         
         #case2 자기 자신을 더하지 않고 나오는 경우의 수
         if dp[i-1][j]!= -1:
@@ -40,4 +39,4 @@ for i in range(n):#li[i]를 이용하여 range를 채운다.
         if dp[i][j] != -1 and j >= mid:
             result = min(result,j - mid)
  #이 결과
-print(abs(total - (mid + result) - (mid + result)))
+print(abs(total - (mid + result)* 2))
