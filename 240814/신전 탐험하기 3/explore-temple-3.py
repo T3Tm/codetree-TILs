@@ -8,5 +8,5 @@ def d(x,y,t):
     return dp[x][y][t]
 n,m = map(int,input().split())
 dp = [[[-1]*(m+1) for _ in range(m+1)] for _ in range(n+1)]
-board =[[0] * 4 ] + [[0] + [*map(int,input().split())] for _ in range(n)]
-print(d(0,0,0))
+board =[[0] * (m+1) ] + [[0] + [*map(int,input().split())] for _ in range(n)]
+print(d(1,0,0))
