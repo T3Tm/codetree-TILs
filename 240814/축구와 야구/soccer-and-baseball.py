@@ -4,7 +4,7 @@ def d(i, j, k):
         return 0
     if dp[i][j][k]!=-1:
         return dp[i][j][k]
-    dp[i][j][k] = max(d(i+1,j+1,k) + point[i][0],d(i+1,j,k+1) + point[i][1])
+    dp[i][j][k] = max(d(i+1,j+1,k) + point[i][0],d(i+1,j,k+1) + point[i][1],d(i+1,j,k))
     return dp[i][j][k]
 
 n = int(input())
