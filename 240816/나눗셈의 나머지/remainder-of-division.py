@@ -2,7 +2,7 @@ a, b = map(int,input().split())
 
 
 modb = [0] * b
-while a:
+while a>1:
     modb[a % b]+=1
     a//=b
 
