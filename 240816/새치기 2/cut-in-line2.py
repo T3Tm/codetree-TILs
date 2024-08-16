@@ -29,7 +29,7 @@ for _ in range(q):
         if len(cache[a_result[0]]) >> 1 > a_result[1]:
             #앞이 더 가깝기 때문에 a_result[1]까지 다 빼내기
             temp = []
-            for _ in range(a_result[1]-1):
+            for _ in range(a_result[1]):
                 temp.append(cache[a_result[0]].popleft())
             cache[a_result[0]].popleft()#자기 자신까지 나오기
             while temp:
@@ -48,7 +48,7 @@ for _ in range(q):
         if len(cache[b_result[0]]) >> 1 > b_result[1]:
             #앞으로 빼는 것이 더 빠름
             temp = []
-            for _ in range(b_result[1]-1):
+            for _ in range(b_result[1]):
                 temp.append(cache[b_result[0]].popleft())
             cache[b_result[0]].appendleft(a)#a를 넣기
             while temp:#다시 원복
@@ -67,14 +67,14 @@ for _ in range(q):
         if len(cache[a_result[0]]) >> 1 > a_result[1]:
             #앞이 더 가깝기 때문에 a_result[1]까지 다 빼내기
             temp = []
-            for _ in range(a_result[1]-1):
+            for _ in range(a_result[1]):
                 temp.append(cache[a_result[0]].popleft())
             cache[a_result[0]].popleft()#자기 자신까지 나오기
             while temp:
                 name = temp.pop()
                 cache[a_result[0]].appendleft(name)
         else:
-            temp = []
+            temp = []#7번 8
             for _ in range(len(cache[a_result[0]])-a_result[1]-1):
                 temp.append(cache[a_result[0]].pop())
             cache[a_result[0]].pop()#자기 자신까지 나오기
@@ -109,9 +109,12 @@ for _ in range(q):
                     tt.append(cache[c_result[0]].popleft())
                 #앞으로 빼서 넣는 것이 이득?
                 while save:
-                    cache[c_result[0]].appendleft(save.popleft())
+                    cache[c_result[0]].appendleft(save.pop())
+                    
+                while tt:
+                    cache[c_result[0]].appendleft(tt.pop())
             else:
-                tt = []
+                tt = []#3,2,1
                 while cache[c_result[0]] and cache[c_result[0]][-1] != b[1]:
                     tt.append(cache[c_result[0]].pop())
                 
@@ -123,9 +126,11 @@ for _ in range(q):
 
                 cache[c_result[0]].append(l)
                 
+                while tt:
+                    cache[c_result[0]].append(tt.pop())
         else:
             #앞으로 빼야됨.
-            temp = []
+            temp = deque()#1,2,3으로 빼냈네?
             while cache[a_result[0]] and cache[a_result[0]][0] != a:
                 temp.append(cache[a_result[0]].popleft())
             
@@ -136,16 +141,21 @@ for _ in range(q):
             if cache[b_result[0]]:
                 save.append(cache[b_result[0]].popleft())#b 자기 자신까지 저장
             #temp에 있는 것은 다시 넣어놓아야 함.
-            while temp:cache[b_result[0]].appendleft(temp.pop())
+            while temp:
+                cache[b_result[0]].appendleft(temp.pop())
             
             c_result = find(b[1])
             if len(cache[c_result[0]]) >> 1 > c_result[1]:#앞으로 빼서 넣는 것이 더 이득
-                tt = []
+                tt = []#1,2,3
                 while cache[c_result[0]] and cache[c_result[0]][0] != b[1]:
                     tt.append(cache[c_result[0]].popleft())
                 #1, 2, 3
                 while save:
-                    cache[c_result[0]].appendleft(save.popleft())
+                    cache[c_result[0]].appendleft(save.pop())
+                    
+                while tt:
+                    cache[c_result[0]].appendleft(tt.pop())
+                
             else:
                 tt = []
                 while cache[c_result[0]] and cache[c_result[0]][-1] != b[1]:
@@ -157,6 +167,9 @@ for _ in range(q):
                     cache[c_result[0]].append(save.popleft())
                 
                 cache[c_result[0]].append(l)
+                
+                while tt:
+                    cache[c_result[0]].append(tt.pop())
 for i in range(m):
     if cache[i]:
         print(*cache[i])
