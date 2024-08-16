@@ -54,8 +54,8 @@ for _ in range(q):
             while temp:#다시 원복
                 name = temp.pop()
                 cache[b_result[0]].appendleft(name)
-        else:
-            temp = []
+        else:#5,4,3
+            temp = []#1,2,3,4,5
             for _ in range(len(cache[b_result[0]])-b_result[1]):
                 temp.append(cache[b_result[0]].pop())
             cache[b_result[0]].append(a)#a를 넣기
@@ -92,13 +92,12 @@ for _ in range(q):
             while cache[b_result[0]] and cache[b_result[0]][-1] != b[0]:
                 temp.append(cache[b_result[0]].pop())
             
-            save = []
-
+            save = deque()#3,2,1
             while cache[a_result[0]] and cache[a_result[0]][-1] != a:
-                save.append(cache[a_result[0]].pop())
+                save.appendleft(cache[a_result[0]].pop())
             
             if cache[a_result[0]]:
-                save.append(cache[a_result[0]].pop())#자기 자신까지 저장
+                save.appendleft(cache[a_result[0]].pop())#자기 자신까지 저장
             #temp에 있는 것은 다시 넣어놓아야 함.
             while temp:cache[a_result[0]].append(temp.pop())
             
@@ -108,9 +107,9 @@ for _ in range(q):
                 tt = []
                 while cache[c_result[0]] and cache[c_result[0]][0] != b[1]:
                     tt.append(cache[c_result[0]].popleft())
-
+                #앞으로 빼서 넣는 것이 이득?
                 while save:
-                    cache[c_result[0]].appendleft(save.pop())
+                    cache[c_result[0]].appendleft(save.popleft())
             else:
                 tt = []
                 while cache[c_result[0]] and cache[c_result[0]][-1] != b[1]:
@@ -119,7 +118,7 @@ for _ in range(q):
                 l = cache[c_result[0]].pop()#자기 자신 빼야됨.
                                 
                 while save:
-                    cache[c_result[0]].append(save.pop())
+                    cache[c_result[0]].append(save.popleft())
                 
 
                 cache[c_result[0]].append(l)
@@ -130,8 +129,8 @@ for _ in range(q):
             while cache[a_result[0]] and cache[a_result[0]][0] != a:
                 temp.append(cache[a_result[0]].popleft())
             
-            save = []
-
+            save = deque()
+            
             while cache[b_result[0]] and cache[b_result[0]][0] != b[0]:
                 save.append(cache[b_result[0]].popleft())
             if cache[b_result[0]]:
@@ -144,9 +143,9 @@ for _ in range(q):
                 tt = []
                 while cache[c_result[0]] and cache[c_result[0]][0] != b[1]:
                     tt.append(cache[c_result[0]].popleft())
-
+                #1, 2, 3
                 while save:
-                    cache[c_result[0]].appendleft(save.pop())
+                    cache[c_result[0]].appendleft(save.popleft())
             else:
                 tt = []
                 while cache[c_result[0]] and cache[c_result[0]][-1] != b[1]:
@@ -155,7 +154,7 @@ for _ in range(q):
                 l = cache[c_result[0]].pop()
                 
                 while save:
-                    cache[c_result[0]].append(save.pop())
+                    cache[c_result[0]].append(save.popleft())
                 
                 cache[c_result[0]].append(l)
 for i in range(m):
