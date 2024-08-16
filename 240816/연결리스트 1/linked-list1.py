@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 class Node:
     def __init__(self, data):
         self.data = data # Linked list의 노드에 담을 데이터
@@ -37,7 +39,7 @@ def pop(u):
     # 이제, u는 단일 노드가 됨
     u.prev = u.next = None
 
-head = Node(input())
+head = Node(input().strip())
 n = int(input())
 
 for _ in range(n):
