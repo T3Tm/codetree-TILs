@@ -41,7 +41,7 @@ def pop(u):
 
 head = Node(input().strip())
 n = int(input())
-
+output = ''
 for _ in range(n):
     cmd, *word = input().split()
 
@@ -69,4 +69,6 @@ for _ in range(n):
         r += f'{c.data}'
     else:
         r += '(Null)'
-    print(r)
+    
+    output += f'{r}\n'
+print(output)
