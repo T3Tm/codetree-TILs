@@ -11,7 +11,7 @@ li.sort()
 hotel = []
 result = 0
 for (s, e) in li:
-    while hotel and hotel[0][0] <=s:
+    while hotel and hotel[0][0] <s:
         heappop(hotel)
     heappush(hotel,[e,s])
     result = max(result, len(hotel))
