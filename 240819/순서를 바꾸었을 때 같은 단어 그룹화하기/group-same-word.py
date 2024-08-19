@@ -11,7 +11,6 @@ for idx in range(n):
     alpha = {}
     for i in word:
         alpha[i] = alpha.get(i, 0) + 1
-    
     dic[idx] = alpha#알파벳 갯수 세기
 
 result = 0
@@ -21,7 +20,10 @@ for idx in range(n):
         if idx == j:continue
 
         flag = True
-        for key in dic[idx]:
+
+        a = len(dic[idx])
+        b = len(dic[j])
+        for key in [dic[idx], dic[j]][a < b]:
             if dic[idx].get(key, -1) != dic[j].get(key, -2):
                 flag=False
                 break
