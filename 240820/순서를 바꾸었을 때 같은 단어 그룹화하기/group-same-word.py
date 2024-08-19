@@ -1,0 +1,36 @@
+n = int(input())
+
+#순서를 바꿔도 된다 == 해당 이루는 알파벳이 같다
+# == 
+
+dic = {}
+
+for idx in range(n):
+    word = input()
+    
+    alpha = {}
+    for i in word:
+        alpha[i] = alpha.get(i, 0) + 1
+    dic[idx] = alpha#알파벳 갯수 세기
+
+result = 0
+check = set()
+for idx in range(n):#n번
+    now = 1
+    check.add(idx)
+    for j in range(n):#n번
+        if idx == j:continue
+        if j in check:continue
+        flag = True
+
+        a = len(dic[idx])
+        b = len(dic[j])
+        for key in [dic[idx], dic[j]][a < b]:#1000
+            if dic[idx].get(key, -1) != dic[j].get(key, -2):
+                flag=False
+                break
+        if flag:
+            now+=1
+            check.add(j)
+    result = max(result, now)
+print(result)
