@@ -14,4 +14,4 @@ while right <= n:
         result = min(result,(right-1) - (left - 1))
         s -= li[left] == 1
         left += 1
-print(result)
+print([result, -1][result == 1000001])
