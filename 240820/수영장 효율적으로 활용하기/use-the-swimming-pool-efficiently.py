@@ -1,6 +1,6 @@
 n, m = map(int, input().split())
 
-li = [*map(int,input().split())] + [0]
+li = [*map(int,input().split())] 
 
 
 left, right = 1, sum(li)
@@ -9,7 +9,10 @@ while left<=right:
     mid = (left +right) >> 1#각 레인당 즐길 수 있는 값
     cnt = 1
     now = 0
-    for i in range(n+1):#15, 11, 16, 15
+    for i in range(n):#15, 11, 16, 15
+        if li[i] > mid:#애초에 불가능
+            cnt = m + 1
+            break
         if now + li[i]<=mid:
             now += li[i]
         else:#넘어감!
