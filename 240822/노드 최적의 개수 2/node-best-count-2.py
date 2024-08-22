@@ -11,16 +11,13 @@ n, m = map(int,input().split())
 #이미 있는 곳에서는 이미 있기 때문에 없는 경우가 있을 수가 없다.
 def dfs(node, state, pre):
     global item, dp
+    if item[node] and not state:return 100001
     if dp[node][state]!=INF:return dp[node][state]
     dp[node][state] = state
     for next in graph[node]:
         if next == pre:continue
-
         if state:#현재 있기 때문에 다른 곳 next들은 있든 없든 상관 없음.
-            if item[next]:
-                dp[node][state] += dfs(next, 1, node)
-            else:
-                dp[node][state] += min(dfs(next, 1, node), dfs(next, 0, node))
+            dp[node][state] += min(dfs(next, 1, node), dfs(next, 0, node))
         else:#내가 없으니까 너는 무조건 켜있어야 함.
             dp[node][state] += dfs(next, 1, node)
     return dp[node][state]
