@@ -15,7 +15,11 @@ for _ in range(n-1):
     graph[a].append(b)
     graph[b].append(a)
 
-k = int(input())
+k = int(input()) 
+# 1 -> 4 -> 3 -> 2
+# 1, 4, 3
+
+# 1, 3
 
 def dfs(cur, prev):
     global height
@@ -37,7 +41,7 @@ dfs(1, 0)#그래프 작성하면서 table 채워봅시다.
 for i in range(1, LOG):#i승
     for node in range(1, n+1):#현재 
         table[node][i] = table[table[node][i-1]][i-1]
-        color[node][i] = color[table[node][i-1]][i-1]
+        color[node][i] = color[table[node][i-1]][i-1] + color[node][i-1]
 
 
 query = int(input())
