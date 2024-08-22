@@ -28,6 +28,7 @@ for next, value in graph[1].items():
 
 while 1:
     value, cur = heappop(q)#이렇게 돼서 나온 것이 연결된 것!
+    if sucess[cur]:continue
     total += value + k*cnt 
     cnt += 1
     sucess[cur] = 1
