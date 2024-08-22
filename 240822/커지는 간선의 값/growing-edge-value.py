@@ -26,6 +26,7 @@ q = []
 for next, value in graph[1].items():
     heappush(q, (value, next))
 
+sucess[1] = 1
 while 1:
     value, cur = heappop(q)#이렇게 돼서 나온 것이 연결된 것!
     if sucess[cur]:continue
@@ -36,5 +37,4 @@ while 1:
     for next, value in graph[cur].items():
         if sucess[next]:continue#이미 연결된 정점이라면 굳이 볼 필요 없음
         heappush(q, (value, next))
-        
 print(total)
