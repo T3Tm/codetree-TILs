@@ -1,4 +1,5 @@
 import sys
+sys.setrecursionlimit(100002)
 input = sys.stdin.readline
 
 
