@@ -7,10 +7,10 @@ def to_int(ch):
     return ord(ch) - ord('a') + 1
 
 # n - 1개
-def dfs(cur, depth, w1 , w2):
+def dfs(cur, depth, w1):
     global result, target_len
 
-    now_hash = [w1, w2]
+    now_hash = w1[::]
     
     if depth > target_len:
         for k in range(2):
@@ -26,7 +26,7 @@ def dfs(cur, depth, w1 , w2):
 
     for next, value in graph[cur]:
         pick[depth] = value
-        dfs(next, depth + 1, now_hash[0], now_hash[1])
+        dfs(next, depth + 1, now_hash)
 
 graph = [[]for _ in range(n+1)]
 for _ in range(n-1):
@@ -36,6 +36,7 @@ for _ in range(n-1):
 
 p = [31, 37]
 m = [10**9 + 7, 10**9 + 9]
+
 p_pow = [
     [0] * (n + 1)
     for _ in range(2)
@@ -55,6 +56,6 @@ for k in range(2):
 result = 0
 
 pick = [0] * (n+1)
-dfs(1, 0, 0 , 0)#n-1번
+dfs(1, 0, [0 , 0])#n-1번
 
 print(result)
