@@ -46,13 +46,13 @@ def rabin_karp(word, t):
 def dfs(cur, word, t):
     global result
     visited[cur] = 1
-    t.append(cur)
     if not len(graph[cur]):
         rabin_karp(word, t)#n
     for next, value in graph[cur]:
         if visited[next]:continue
+        t.append(next)
         dfs(next, word + value, t)
-    t.pop()
+        t.pop()
 
 graph = [[]for _ in range(n+1)]
 for _ in range(n-1):
