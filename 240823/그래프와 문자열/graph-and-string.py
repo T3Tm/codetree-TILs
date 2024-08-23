@@ -1,58 +1,32 @@
 import sys
-sys.setrecursionlimit(100002)
 input = sys.stdin.readline
 n, s = input().split()
 n = int(n)
-'''
-노드 n개와 n-1개의 간선으로 이뤄진 그래프가 있다.
 
-각 간선에는 소문자 알파벳이 하나씩 적혀있으며,
+def to_int(ch):
+    return ord(ch) - ord('a') + 1
 
-방향 그래프 
-
-dfs(1)
-
-목적 S 문자열이 존재
-1 -> 2 a
-    2 -> 4 ab
-        4 -> 5 abb
-
-1 -> 6 b
-    6 -> 7 ba
-        7 -> 3 bab
-        7 -> 8 bac
-'''
 # n - 1개
-def rabin_karp(word, t):
-    if len(word) < target_len:return
-    word_hash = [0,0]
+def dfs(cur, depth, w1 , w2):
+    global result, target_len
 
-    for i in range(target_len):
+    now_hash = [w1, w2]
+    
+    if depth > target_len:
         for k in range(2):
-            word_hash[k] = (word_hash[k] + to_int(word[i])*p_pow[k][target_len - i - 1])%m[k]
-    
-    if word_hash == target_hash:
-        result.add((t[0], t[target_len-1]))
-    
-    
-    for i in range(1, len(word) - target_len + 1):
+            now_hash[k] = ((now_hash[k] - to_int(pick[depth - target_len - 1]) * p_pow[k][target_len-1])*p[k] + to_int(pick[depth-1]) + m[k])%m[k]
+
+    elif depth == target_len:
         for k in range(2):
-            word_hash[k] = ((word_hash[k] - to_int(word[i-1]) * p_pow[k][-1])*p[k] + to_int(word[i + target_len - 1]) + m[k])%m[k]
+            for i in range(target_len):
+                now_hash[k] = (now_hash[k] + to_int(pick[i]) * p_pow[k][target_len - i - 1])%m[k]
+    
+    if now_hash == target_hash:
+        result += 1
 
-        if word_hash == target_hash:
-            result.add((t[i], t[i + target_len-1]))
-
-
-def dfs(cur, word, t):
-    global result
-    visited[cur] = 1
-    if not len(graph[cur]):
-        rabin_karp(word, t)#n
     for next, value in graph[cur]:
-        if visited[next]:continue
-        t.append(next)
-        dfs(next, word + value, t)
-        t.pop()
+        pick[depth] = value
+        dfs(next, depth + 1, now_hash[0], now_hash[1])
 
 graph = [[]for _ in range(n+1)]
 for _ in range(n-1):
@@ -62,24 +36,25 @@ for _ in range(n-1):
 
 p = [31, 37]
 m = [10**9 + 7, 10**9 + 9]
-p_pow = [[1]for _ in range(2)]
+p_pow = [
+    [0] * (n + 1)
+    for _ in range(2)
+]
+
 for k in range(2):
-    for _ in range(1, len(s)):
-        p_pow[k].append((p_pow[k][-1] * p[k]) % m[k])
-
-
-def to_int(ch):
-    return ord(ch) - ord('a') + 1
+    p_pow[k][0] = 1
+    for i in range(1, n+1):
+        p_pow[k][i] = (p_pow[k][i-1] * p[k]) % m[k]
 
 target_len = len(s)
 target_hash = [0, 0]
-for i in range(target_len):
-    for k in range(2):
+for k in range(2):
+    for i in range(target_len):
         target_hash[k] = (target_hash[k] + to_int(s[i])*p_pow[k][target_len - i - 1])%m[k]
 
+result = 0
 
-visited=[0] * (n+1)
-result = set()
-dfs(1,'', [])#n-1번
+pick = [0] * (n+1)
+dfs(1, 0, 0 , 0)#n-1번
 
-print(len(result))
+print(result)
