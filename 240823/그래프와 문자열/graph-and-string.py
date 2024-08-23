@@ -32,7 +32,7 @@ def rabin_karp(word, t):
             word_hash[k] = (word_hash[k] + to_int(word[i])*p_pow[k][target_len - i - 1])%m[k]
     
     if word_hash == target_hash:
-        result[t[0]] = 1
+        result.add((t[0], t[target_len-1]))
     
     
     for i in range(1, len(word) - target_len + 1):
@@ -40,7 +40,7 @@ def rabin_karp(word, t):
             word_hash[k] = ((word_hash[k] - to_int(word[i-1]) * p_pow[k][-1])*p[k] + to_int(word[i + target_len - 1]) + m[k])%m[k]
 
         if word_hash == target_hash:
-            result[t[i]] = 1
+            result.add((t[i], t[i + target_len-1]))
 
 
 def dfs(cur, word, t):
@@ -79,7 +79,7 @@ for i in range(target_len):
 
 
 visited=[0] * (n+1)
-result = [0] * (n+1)
+result = set()
 dfs(1,'', [])#n-1번
 
-print(sum(result))
+print(len(result))
