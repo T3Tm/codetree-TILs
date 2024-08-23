@@ -37,17 +37,18 @@ for _ in range(n-1):
 p = [31, 37]
 m = [10**9 + 7, 10**9 + 9]
 
+target_len = len(s)
 p_pow = [
-    [0] * (n + 1)
+    [0] * (target_len)
     for _ in range(2)
 ]
 
 for k in range(2):
     p_pow[k][0] = 1
-    for i in range(1, n+1):
+    for i in range(1, target_len):
         p_pow[k][i] = (p_pow[k][i-1] * p[k]) % m[k]
 
-target_len = len(s)
+
 target_hash = [0, 0]
 for k in range(2):
     for i in range(target_len):
