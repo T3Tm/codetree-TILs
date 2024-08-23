@@ -26,5 +26,6 @@ for i in range(x1, x2+1):
 
             miniy = min(miniy, j)
             maxiy = max(maxiy, j)
-
-print( (maxix - minix)*(maxiy - miniy))
+if minix == 2003:print(0)
+else:
+    print( (maxix - minix)*(maxiy - miniy))
