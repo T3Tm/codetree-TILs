@@ -1,8 +1,8 @@
-x1,y1,x2,y2 = map(lambda x: int(x) + 100, input().split())
+x1,y1,x2,y2 = map(lambda x: int(x) + 1000, input().split())
 
-x3,y3,x4,y4 = map(lambda x: int(x) + 100, input().split())
+x3,y3,x4,y4 = map(lambda x: int(x) + 1000, input().split())
 
-board = [[0]*202 for _ in range(202)]
+board = [[0]*2002 for _ in range(2002)]
 
 for i in range(x1, x2+1):
     for j in range(y1, y2+1):
