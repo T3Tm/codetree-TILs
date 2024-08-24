@@ -29,4 +29,4 @@ for _ in range(m):
     if cmd == 'x':
         merge(int(a), int(b[0]))
     else:
-        print(connect_cnt[int(a)])
+        print(connect_cnt[find(int(a))])
