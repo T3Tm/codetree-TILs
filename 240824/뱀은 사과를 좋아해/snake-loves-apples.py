@@ -37,7 +37,7 @@ for _ in range(k):
             exit(0)
         
         #몸 박 확인
-        for i in range(1, len(q)):
+        for i in range(len(q)-1):
             if [nx, ny] == q[i]:#몸 박
                 print(time)
                 exit(0)
