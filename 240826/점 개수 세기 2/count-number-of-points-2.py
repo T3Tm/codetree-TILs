@@ -13,6 +13,7 @@ li.sort()
 li.append((10**9+1, 10**9 + 1))
 x_pos = sorted(x_pos)
 x_pos.append(10**9 + 1)
+
 #정렬을 하는데
 #for문 돌리면서 자신보다 큰 j만 갖고 오면 된다.
 search = {}
@@ -23,26 +24,27 @@ for idx in range(n+1):
     
     for j in range(idx, n+1):
         nx, ny = li[j]
-        if y <= ny:
-            search[x].append(ny)
+        search[x].append(ny)
 
 for x in x_pos:#2500
     search[x].sort()
 
 for _ in range(q):
     x1, y1, x2, y2 = map(int ,input().split())
-    left_point = bisect_left(x_pos, x1)#이 지점부터
-    left_x_point = x_pos[left_point]
-
-    right_point = bisect_left(x_pos, x2)#이 지점부터
-    right_x_point = x_pos[right_point]
     
-    #list 
-    left_y_point = bisect_left(search[left_x_point], y1)
+    #x1,y1에서 left 갯수 세기
+    x1_point = x_pos[bisect_left(x_pos, x1)]
+    total_cnt = bisect_left(search[x1_point], y1)
 
-    bigger_y1_cnt = len(search[left_x_point]) - left_y_point
-    #1,2,3,4,5
-    right_y_point = bisect_right(search[right_x_point], y2)
-    bigger_y2_cnt = len(search[right_x_point]) - right_y_point
+    #x2+1, y1 left갯수 세기
+    x2_plus_point = x_pos[bisect_right(x_pos, x2)]
+    x2_cnt = bisect_left(search[x2_plus_point], y1)
 
-    print(bigger_y1_cnt - bigger_y2_cnt)
+    #x1에서 y2 right 갯수
+    x1_y2_cnt = bisect_right(search[x1_point], y2)
+    
+    #x2하나 크고, y2
+    x2_y2_cnt = bisect_right(search[x2_plus_point], y2)
+    x2_plus_len = len(search[x2_plus_point])
+    x1_len = len(search[x1_point])
+    print((x1_len - total_cnt) - (x1_len - x1_y2_cnt) - (x2_plus_len - x2_cnt) + (x2_plus_len - x2_y2_cnt))
