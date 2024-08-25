@@ -18,8 +18,8 @@ for i in range(1, t_len):
     f[i] = j + 1
 
 j = cnt = 0
-for i in range(1, p_len-1):
-    while j>=0 and p[j+1]!=p[i]:
+for i in range(1, n*2-1):
+    while j>=0 and t[j+1]!=p[i]:
         j = f[j]
     j+= 1
     if j == t_len - 1:
