@@ -1,15 +1,18 @@
 n = int(input())
-arr = [*map(int,input().split())]
+arr = [0] + [*map(int,input().split())]
+prefix = [0] * (n+1)
 
+for i in range(1,n+1):
+    prefix[i] = prefix[i-1] + arr[i]
 result = 0
 
-for i in range(1,n-1):
-    now = sum(arr[1:i]+[0])
-    now += sum(arr[i+1:]+[0])*2
-    result = max(result, now)
-
 for i in range(2,n):
-    now = sum(arr[0:-i] + [0])*2
-    now += sum(arr[-i + 1:-1] + [0])
+    now = (prefix[i-1] - prefix[1])
+    now += (prefix[n] - prefix[i])*2
+    result= max(result, now)
+
+for i in range(n-1, 1,-1):
+    now = prefix[i-1]*2
+    now += prefix[n-1] - prefix[i]
     result = max(result, now)
 print(result)
