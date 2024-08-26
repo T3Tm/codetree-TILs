@@ -17,7 +17,7 @@ for k in range(m):
         f[k][i] = j + 1
 #모든 곳에 실패함수 만들고
 
-dp = [0]*(len(t)+1)
+dp = [0]*len(t)
 j_m = [0] * m
 for i in range(1, len(t)):
 
@@ -31,4 +31,4 @@ for i in range(1, len(t)):
 
             dp[i] = max(dp[i], dp[i - (len(pattern[k])-1)] + len(pattern[k])-1)
     dp[i] = max(dp[i], dp[i-1])
-print(max(dp))
+print(dp[-1])
