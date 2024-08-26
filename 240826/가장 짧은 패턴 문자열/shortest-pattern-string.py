@@ -19,7 +19,7 @@ while left<=right:#17번
     pattern = '#' + t[1:mid+1]*(len(t)//mid)
 
     j = 0
-    for i in range(1, len(t)):
+    for i in range(1, min(len(t),len(pattern))):
         while j >= 0 and t[j+1]!=pattern[i]:
             j = f[j]
         j += 1
