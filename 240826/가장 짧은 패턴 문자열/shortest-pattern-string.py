@@ -1,3 +1,4 @@
+import math
 t = '#'+input() #어차피 제일 길어봤자 T임
 #t를 2배 해놓고
 #aabaabaab
@@ -16,7 +17,7 @@ left,right = 1, len(t)-1
 
 while left<=right:#17번 
     mid = (left+right) >> 1
-    pattern = '#' + t[1:mid+1]*(len(t)//mid)
+    pattern = '#' + t[1:mid+1]*math.ceil((len(t)-1)/mid)
 
     j = 0
     for i in range(1, min(len(t),len(pattern))):
