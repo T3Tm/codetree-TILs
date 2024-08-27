@@ -13,7 +13,8 @@ n, m = map(int, input().split())
 
 N = [0] + [*map(int, input().split())]
 M = [0] + [*map(int, input().split())]
-assert m != (len(M) -1)
+assert m == (len(M) -1)
+
 if m > n:
     n,m = m,n
     tmp = N[::]
