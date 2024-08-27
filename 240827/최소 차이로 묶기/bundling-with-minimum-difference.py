@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(1001)
+sys.setrecursionlimit(2020)
 INF = 10**9 + 1
 def dfs(x, y):
     global maxi
@@ -13,6 +13,7 @@ n, m = map(int, input().split())
 
 N = [0] + [*map(int, input().split())]
 M = [0] + [*map(int, input().split())]
+assert m != (len(M) -1)
 if m > n:
     n,m = m,n
     tmp = N[::]
