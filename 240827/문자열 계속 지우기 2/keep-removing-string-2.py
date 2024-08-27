@@ -32,5 +32,5 @@ for i in range(1, len(A)):
         if result:
             j = result[-1][1]
         else:
-            j = f[j]
+            j = 0
 print(''.join(map(lambda x:x[0], result)))
