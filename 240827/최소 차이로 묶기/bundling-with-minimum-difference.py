@@ -3,6 +3,8 @@ n, m = map(int, input().split())
 arrn = [*map(int,input().split())] 
 arrm = [*map(int,input().split())]
 
+n = len(arrn)
+m = len(arrm)
 if m > n:#무조건 n이 m보다 크거나 같게 만든다
     n,m = m,n
     tmp = arrn[::]
