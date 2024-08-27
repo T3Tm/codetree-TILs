@@ -6,13 +6,13 @@ int v[2][1005];
 int dfs(int x, int y){
     if(y == n)return 0;
     if (x == m)return 0x3f3f3f3f;
-    if (dp[x][y] != -1)return dp[x][y];
+    if (dp[x][y] != 0x3f3f3f3f)return dp[x][y];
     dp[x][y] = min(dfs(x+1,y), dfs(x+1,y+1)+abs(v[1][x] - v[0][y]));
     return dp[x][y];
 }
 int main(){
     cin.tie(0) -> ios::sync_with_stdio(0);
-    memset(dp, -1, sizeof dp);
+    memset(dp, 0x3f, sizeof dp);
 
     cin >> n >> m;
     for(int i=1;i<=n;i++)cin >> v[0][i];
