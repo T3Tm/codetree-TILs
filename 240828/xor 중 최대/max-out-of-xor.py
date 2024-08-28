@@ -11,7 +11,7 @@ def to_binary(n, result, depth = 0):
 
 class Trie:
     def __init__(self, ):
-        self.data: [Trie] = [None] * 2
+        self.data = {}
         self.is_end = 0#현재 데이터 끝인지 확인
         self.end_point = 0
     def to_int(self,ch):
@@ -19,7 +19,8 @@ class Trie:
 
 
     def insert(self, v,max_depth = 0 ,idx = 0):
-        if self.data[self.to_int(v[idx])] == None:#
+        num = self.to_int(v[idx])
+        if num not in self.data:#
             self.data[self.to_int(v[idx])] = Trie()#노드 생성
         if max_depth == idx + 1:#여기서 그만
             self.data[self.to_int(v[idx])].is_end += 1
@@ -27,9 +28,10 @@ class Trie:
             self.data[self.to_int(v[idx])].insert(v,max_depth,idx+1)
             
     def find(self, v, idx = 0):#해당 문자열 있는지 판단
+        num = self.to_int(v[idx])
         if len(v) - 1 == idx:#있음
-            return self.data[self.to_int(v[idx])].is_end > 0
-        if self.data[self.to_int(v[idx])] == None:return 0
+            return self.data[num].is_end > 0
+        if num not in self.data:return 0
         return self.data[self.to_int(v[idx])].find(v,idx+1)
     
     def end_point(self):
@@ -57,7 +59,7 @@ def find(t: Trie, number, idx, result):
     #이 아이와 반대면서 비트 켜져 있는 아이들 한테로 들어가자
     number_int = int(number[idx]) ^ 1
     if idx + 1 == 32:#해당 곳에 값이 있는지 확인
-        if t.data[number_int]:#해당 데이터 있다면?
+        if number_int in t.data:#해당 데이터 있다면?
             if t.data[number_int].is_end:
                 result += f'{number_int}'    
         else:
@@ -66,7 +68,7 @@ def find(t: Trie, number, idx, result):
         now = max(num ^ int(result,2),now)
         return
     
-    if t.data[number_int]:#있다면 그쪽으로 들어가서 최댓값 갖고 가기
+    if number_int in t.data:#있다면 그쪽으로 들어가서 최댓값 갖고 가기
         find(t.data[number_int], number, idx + 1, result + f'{number_int}')
     else:
         find(t.data[number_int^1], number, idx + 1, result + f'{number[idx]}')
