@@ -2,10 +2,10 @@ n = int(input())
 arr = input().split()
 
 result = 0
-for i in range(n-1):
-    for j in range(i+1,n):
-        word = '#'+ '#'.join(arr[i] + arr[j])+'#'
-        words = '#'+'#'.join(arr[j] + arr[i]) + '#'
+for t in range(n-1):
+    for m in range(t+1,n):
+        word = '#'+ '#'.join(arr[t] + arr[m])+'#'
+        words = '#'+'#'.join(arr[m] + arr[t]) + '#'
         
         A = [0] * len(word)
         AA = [0] * len(words)
@@ -33,6 +33,6 @@ for i in range(n-1):
                     AA[i]+=1
             if i + AA[i] > r:
                 r, q = i + AA[i], i
-        if 2*A[len(word)//2]+1 == len(word):#이 곳의 값이 반지름인지 확인
-            result = max(result, len(word)//2)
+        if 2*AA[len(words)//2]+1 == len(words):#이 곳의 값이 반지름인지 확인
+            result = max(result, len(words)//2)
 print(result)
