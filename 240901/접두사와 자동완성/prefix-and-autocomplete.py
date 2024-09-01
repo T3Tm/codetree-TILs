@@ -15,22 +15,18 @@ def insert(string):
 
 word = {}#각 단어에 맞게 몇 개씩 검색해야 되는지 
 def find(cur, now, cnt):
-    nexts = set(cur.keys())
-    
-    for k in nexts:
-        if k == 0:continue#끝
-        
-        if len(nexts) == 1:
-            find(cur[k], now + k, cnt)
-        elif len(nexts) == 2:
-            if 0 in nexts:
-                find(cur[k], now + k,cnt)
-            else:
-                find(cur[k], now +k,cnt+1)
+    ALL = set(cur.keys())
+    next = ALL - {0}
+    if len(next) == 1:#갈 곳이 한 곳밖에 없다면
+        if 0 in ALL:
+            find(cur[[*next][0]], now + [*next][0], cnt + 1)
         else:
-            find(cur[k], now +k,cnt+1)
+            find(cur[[*next][0]], now + [*next][0], cnt )
+    else:
+        for nexts in next:
+            find(cur[nexts],now + nexts, cnt + 1)
     
-    if 0 in nexts:
+    if 0 in ALL:#여기서 끝나는 애들
         word[now] = cnt
 
 arr = input().split()
@@ -39,5 +35,6 @@ for v in arr:
     insert(v)
 for value in trie.keys():    
     find(trie[value], value, 1)
+
 for p in arr:
-    print(word[p], end =' ')
+    print(word[p], end=' ')
