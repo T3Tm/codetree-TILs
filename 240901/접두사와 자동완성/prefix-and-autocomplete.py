@@ -14,29 +14,29 @@ def insert(string):
 
 word = {}#각 단어에 맞게 몇 개씩 검색해야 되는지 
 def find(cur, now, cnt):
-    nexts = [*cur.keys()]
-    if len(nexts) == 1:
-        if nexts[0] != 0:
-            find(cur[nexts[0]], now + nexts[0],cnt)
-    elif len(nexts) == 2:
-        if nexts[1] == 0:
-            find(cur[nexts[0]], now + nexts[0],cnt)
+    nexts = set(cur.keys())
+    
+    for k in nexts:
+        if k == 0:continue#끝
+        
+        if len(nexts) == 1:
+            find(cur[k], now + k, cnt)
+        elif len(nexts) == 2:
+            if 0 in nexts:
+                find(cur[k], now + k,cnt)
+            else:
+                find(cur[k], now +k,cnt+1)
         else:
-            for j in nexts:
-                if j == 0:continue
-                find(cur[j],now + j, cnt + 1)
-    else:    
-        for j in nexts:
-            if j == 0:continue
-            find(cur[j],now + j, cnt + 1)
-    if 0 in set(nexts):
+            find(cur[k], now +k,cnt+1)
+    
+    if 0 in nexts:
         word[now] = cnt
 
 arr = input().split()
 
 for v in arr:
     insert(v)
-
-find(trie, '',0)
+for value in trie.keys():    
+    find(trie[value], value, 1)
 for p in arr:
     print(word[p], end =' ')
