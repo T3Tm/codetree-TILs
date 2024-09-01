@@ -15,7 +15,7 @@ def insert(List):
     cur[0] = 1
 
 def prints(cur, depth):
-    for key in sorted(cur.keys()):
+    for key in sorted(filter(lambda x: x != 0,cur.keys())):
         if key == 0:continue
         print('--' * depth + key)
         prints(cur[key], depth + 1)
