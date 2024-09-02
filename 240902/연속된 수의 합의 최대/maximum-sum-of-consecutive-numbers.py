@@ -10,25 +10,14 @@ INF = 10**9
 n, k =map(int ,input().split())
 arr = [*map(int, input().split())]
 
-dp = [[-INF]*(n+2) for _ in range(n+1)]#연속해서 몇 개를 선택했는지 알아야 됨.
+prefix = [0]*(n+1)
 
-#k개는 선택해야 하므로
-#모든 곳에 k개까지는 선택하도록 만든다.
+for i in range(1, k+1):
+    prefix[i] = prefix[i-1] + arr[i-1]
 
-#dp[i][0] = i까지 0개 선택헀을 때
-for i in range(n):
-    dp[i][1] = arr[i]#1개 고르는 경우
-result = -INF
-for j in range(2,k+1):#1개부터 n개 고르는 경우의 수
-    for i in range(n):
-        if i + 1 < j:continue
-        dp[i][j] = dp[i-1][j-1] + arr[i]
-        if j == k:
-            result = max(result, dp[i][j])
+#k개는 연속적으로 선택했어야 하니까
 
-for j in range(k+1,n+1):
-    for i in range(n):
-        if i + 1 < j :continue
-        dp[i][j] = dp[i-1][j-1] + arr[i]
-        result = max(result, dp[i][j])
-print(result)
+for i in range(k+1, n+1):
+    prefix[i] = max(prefix[i-1] + arr[i-1], prefix[i-1] + arr[i-1] - prefix[i-k])
+
+print(max(prefix[k:]))
