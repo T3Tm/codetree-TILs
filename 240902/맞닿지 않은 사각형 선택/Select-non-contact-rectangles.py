@@ -1,6 +1,6 @@
 n = int(input())
 
-dp = [[0] * (n+1) for _ in range(n)]
+dp = [[0] * (n+1) for _ in range(2)]
 
 
 arr = [[0] + [*map(int,input().split())]for _ in range(2)]
