@@ -12,6 +12,7 @@ int dfs(int x,int y){
     }
     if(y == m)return dfs(x+m,0);
     if(dp[x][y] !=-1)return dp[x][y];
+    dp[x][y]=0;
     int ret1 = dfs(x+1,y+1);
     int ret2 = dfs(x+1,max(y-1,0));
     if(ret1!=-1)dp[x][y] = ret1 + arr[x];
