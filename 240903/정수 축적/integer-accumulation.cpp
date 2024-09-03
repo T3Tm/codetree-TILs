@@ -5,18 +5,16 @@ int dp[10002][1000];
 int n,m;
 int arr[10002];
 int dfs(int x,int y){
-    if(x > n)return -1;
-    else if(x == n){
-        if(y == 0)return 0;
-        return -1;
+    if(x>n)return -1e9;
+    if(x == n){
+        if (y==0)return 0;
+        return -1e9;
     }
-    if(y == m)return dfs(x+m,0);
+    if(y == m){
+        return dfs(x+m,0);
+    }
     if(dp[x][y] !=-1)return dp[x][y];
-    dp[x][y]=0;
-    int ret1 = dfs(x+1,y+1);
-    int ret2 = dfs(x+1,max(y-1,0));
-    if(ret1!=-1)dp[x][y] = ret1 + arr[x];
-    if(ret2 !=-1)dp[x][y] = max(dp[x][y], ret2);
+    dp[x][y]=max(dfs(x+1,y+1)+arr[x],dfs(x+1,max(y-1,0)));
     return dp[x][y];
 }
 int main() {
